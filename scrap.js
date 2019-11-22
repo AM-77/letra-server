@@ -32,6 +32,39 @@ module.exports = (url, type) => {
                     }
                     break
 
+                case Types.ARTIST:
+                    if (!error) {
+                        let $ = cheerio.load(html)
+                        result.artist = ""
+                        result.albums = []
+
+                        $("body > div.container.main-page > div h1 > strong").filter(function () {
+                            result.artist = $(this).text().replace("Lyrics", "").trim()
+                        })
+
+                        $('#listAlbum div, #listAlbum a').filter(function () {
+                            $(this).each(function () {
+                                if ($(this).hasClass("album")) {
+                                    result.albums.push({
+                                        title: $(this).text(),
+                                        tracks: []
+                                    })
+                                } else {
+                                    result.albums[(result.albums.length - 1)].tracks.push({
+                                        title: $(this).text(),
+                                        link: `/lyrics${$(this).attr("href").slice(9, -5)}`
+                                    })
+
+                                }
+                            })
+                        })
+
+                    } else {
+                        console.error("[!] There was an error in: scrap.js/switch/type.ARTIST")
+                        result.error = true
+                    }
+                    break
+
                 default:
                     break
             }
