@@ -1,7 +1,7 @@
 module.exports = {
     LYRICS: "lyrics",
     ARTIST: "artist",
-    HOME_PAGE: "home-page",
+    HOME: "home",
     LIST_ARTISTS: "list-artists",
     SEARCH: "search"
 }
