@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000
 
 app.get("/", (req, res) => {
 
-    scrap(BASE_LINK, types.HOME_PAGE)
+    scrap(BASE_LINK, types.HOME)
         .then((result) => {
             if (Object.keys(result).length === 0 && result.constructor === Object)
                 res.status(200).json({

@@ -65,6 +65,53 @@ module.exports = (url, type) => {
                     }
                     break
 
+                case Types.HOME:
+                    if (!error) {
+                        let $ = cheerio.load(html)
+                        result.hotsongs = []
+                        result.hotalbums = []
+
+                        $('body > div.container.main-page .hotsongs').filter(function () {
+                            let hotsongs = $(this).text().trim().split("\n")
+                            let hotsong = {
+                                artist: "",
+                                title: ""
+                            }
+
+                            hotsongs.map(track => {
+                                hotsong.artist = track.slice(0, track.indexOf("-")).replace("-", "").trim()
+                                hotsong.title = track.slice(track.indexOf("-")).replace("-", "").replace('"').trim()
+
+                                result.hotsongs.push(hotsong)
+                                hotsong = {
+                                    artist: "",
+                                    title: ""
+                                }
+                            })
+                        })
+
+                        $('body > div.container.main-page .albuma').filter(function () {
+                            let hotalbums = $(this).html()
+                            let hotalbum = {
+                                artist: "",
+                                album: "",
+                                artwork: ""
+                            }
+
+                            hotalbum.artist = $(this).find("a").text()
+                            hotalbum.album = $(this).text().slice($(this).text().indexOf(" \"") + 2, -1)
+                            hotalbum.artwork = `${url}${hotalbums.slice(hotalbums.indexOf("img") + 9, hotalbums.indexOf("\" alt"))}`
+
+                            result.hotalbums.push(hotalbum)
+                        })
+
+
+                    } else {
+                        console.error("[!] There was an error in: scrap.js/switch/type.HOME_PAGE")
+                        result.error = true
+                    }
+                    break
+
                 default:
                     break
             }
