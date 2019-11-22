@@ -112,6 +112,30 @@ module.exports = (url, type) => {
                     }
                     break
 
+                case Types.LIST_ARTISTS:
+                    if (!error) {
+                        let $ = cheerio.load(html)
+                        result.artists = []
+
+
+                        $('body > div.container.main-page > div .artist-col a').filter(function () {
+                            let artist = {
+                                name: "",
+                                link: ""
+                            }
+
+                            artist.name = $(this).text()
+                            artist.link = `/artist${$(this).attr("href").slice($(this).attr("href").indexOf("/"), -5)}`
+
+                            result.artists.push(artist)
+                        })
+
+                    } else {
+                        console.error("[!] There was an error in: scrap.js/switch/type.LIST_ARTISTS")
+                        result.error = true
+                    }
+                    break
+
                 default:
                     break
             }

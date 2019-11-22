@@ -20,10 +20,10 @@ app.get("/", (req, res) => {
 
 })
 
-app.get("/artists/:starts_with", (req, res) => {
+app.get("/artists/:first_letter", (req, res) => {
 
-    if (req.params.starts_with)
-        scrap(`${BASE_LINK}/${req.params.starts_with}.html`, types.LIST_ARTISTS)
+    if (req.params.first_letter)
+        scrap(`${BASE_LINK}/${req.params.first_letter}.html`, types.LIST_ARTISTS)
         .then((result) => {
             if (Object.keys(result).length === 0 && result.constructor === Object)
                 res.status(200).json({
