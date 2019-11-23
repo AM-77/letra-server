@@ -5,7 +5,7 @@ const app = express()
 
 const BASE_LINK = "https://www.azlyrics.com"
 const SEARCH_LINK = "https://search.azlyrics.com/search.php?q="
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 7700
 
 app.get("/", (req, res) => {
     scrap(BASE_LINK, types.HOME)
