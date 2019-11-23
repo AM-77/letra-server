@@ -30,7 +30,7 @@ module.exports = (url, type) => {
                             })
 
                         } else {
-                            console.error("[!] There was an error in: scrap.js/switch/type.LYRICS")
+                            console.error("[!] There was an error in: scrap.js/switch/type.LYRICS \nError: " + error)
                             result.error = true
                         }
                         break
@@ -63,7 +63,7 @@ module.exports = (url, type) => {
                             })
 
                         } else {
-                            console.error("[!] There was an error in: scrap.js/switch/type.ARTIST")
+                            console.error("[!] There was an error in: scrap.js/switch/type.ARTIST \nError: " + error)
                             result.error = true
                         }
                         break
@@ -110,7 +110,7 @@ module.exports = (url, type) => {
 
 
                         } else {
-                            console.error("[!] There was an error in: scrap.js/switch/type.HOME_PAGE")
+                            console.error("[!] There was an error in: scrap.js/switch/type.HOME \nError: " + error)
                             result.error = true
                         }
                         break
@@ -133,7 +133,7 @@ module.exports = (url, type) => {
                             })
 
                         } else {
-                            console.error("[!] There was an error in: scrap.js/switch/type.LIST_ARTISTS")
+                            console.error("[!] There was an error in: scrap.js/switch/type.LIST_ARTISTS \nError: " + error)
                             result.error = true
                         }
                         break
@@ -182,7 +182,7 @@ module.exports = (url, type) => {
                     })
 
                 } else {
-                    console.error("[!] There was an error in: scrap.js/switch/type.SEARCH_MORE")
+                    console.error("[!] There was an error in: scrap.js/switch/type.SEARCH_MORE \nError: " + error)
                     result.error = true
                 }
 
