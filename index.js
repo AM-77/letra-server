@@ -98,4 +98,4 @@ app.get("/search/:query", (req, res) => {
         res.redirect("/home")
 })
 
-app.listen(PORT);
+app.listen(PORT, () => console.log("Letra Server is running ..."));
