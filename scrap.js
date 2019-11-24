@@ -60,21 +60,28 @@ module.exports = (url, type) => {
                         result.hotalbums = []
 
                         $('body > div.container.main-page .hotsongs').filter(function () {
-                            let hotsongs = $(this).text().trim().split("\n")
+                            let hotsongs = $(this).html().trim().split("\n")
                             let hotsong = {
                                 artist: "",
-                                title: ""
+                                title: "",
+                                link: ""
                             }
 
                             hotsongs.map(track => {
-                                hotsong.artist = track.slice(0, track.indexOf("-")).replace("-", "").trim()
-                                hotsong.title = track.slice(track.indexOf("-")).replace("-", "").replace(new RegExp(/\"/g), "").trim()
 
-                                result.hotsongs.push(hotsong)
-                                hotsong = {
-                                    artist: "",
-                                    title: ""
+                                if ($(track).text().length > 0) {
+
+                                    hotsong.artist = $(track).text().split("-")[0].replace(new RegExp(/\"/g), "", "").trim()
+                                    hotsong.title = $(track).text().split("-")[1].replace(new RegExp(/\"/g), "", "").trim()
+                                    hotsong.link = $(track).attr("href").slice(18, $(track).attr("href").indexOf(".html"))
+                                    result.hotsongs.push(hotsong)
+                                    hotsong = {
+                                        artist: "",
+                                        title: "",
+                                        link: ""
+                                    }
                                 }
+
                             })
                         })
 
