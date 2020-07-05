@@ -1,13 +1,18 @@
 const Types = require("./types")
-const axios = require("axios")
 const cheerio = require("cheerio")
+const axios = require('axios').default
+const axiosCookieJarSupport = require('axios-cookiejar-support').default
+const tough = require('tough-cookie')
+ 
+axiosCookieJarSupport(axios)
+const cookieJar = new tough.CookieJar()
 
 module.exports = (url, type) => {
     return new Promise((resolve, reject) => {
 
         let result = {}
 
-        axios.get(url)
+        axios.get(url, { jar: cookieJar, withCredentials: true })
             .then(function (html) {
 
                 let $ = cheerio.load(html.data)
