@@ -1,21 +1,18 @@
 const Types = require("./types")
 const cheerio = require("cheerio")
-const axios = require('axios').default
-const axiosCookieJarSupport = require('axios-cookiejar-support').default
-const tough = require('tough-cookie')
- 
-axiosCookieJarSupport(axios)
-const cookieJar = new tough.CookieJar()
+const got = require('got')
 
 module.exports = (url, type) => {
-    return new Promise((resolve, reject) => {
+    return new Promise( (resolve, reject) => {
+        (async () => {
+            
+            let result = {}
 
-        let result = {}
+            try {
+                const response = await got('https://www.azlyrics.com/')
+                let html = response.body
 
-        axios.get(url, { jar: cookieJar, withCredentials: true })
-            .then(function (html) {
-
-                let $ = cheerio.load(html.data)
+                let $ = cheerio.load(html)
 
                 switch (type) {
                     case Types.LYRICS:
@@ -180,14 +177,14 @@ module.exports = (url, type) => {
                         break
                 }
 
-            })
-            .catch(function (error) {
+            }
+            catch (error) {
                 console.error("[!] There was an error : " + error)
                 result.error = error.message
-            })
-            .finally(function(){
+            }
+            finally {
                 resolve(result)
-            })
+            }
+        })()
     })
-
 }
