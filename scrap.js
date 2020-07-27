@@ -9,9 +9,9 @@ module.exports = (url, type) => {
             let result = {}
 
             try {
-                const response = await got('https://www.azlyrics.com/')
+                const response = await got(url)
                 let html = response.body
-
+                console.log(html)
                 let $ = cheerio.load(html)
 
                 switch (type) {
@@ -118,7 +118,7 @@ module.exports = (url, type) => {
 
                     case Types.LIST_ARTISTS:
                         result.artists = []
-
+                        console.log($)
                         $('body > div.container.main-page > div .artist-col a').filter(function () {
                             let artist = {
                                 name: "",
