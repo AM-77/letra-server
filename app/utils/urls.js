@@ -1,5 +1,4 @@
-const { BASE_URL } = process.env;
-const { SEARCH_URL } = process.env;
+const { BASE_URL, SEARCH_URL } = process.env;
 
 const formatSearchURL = (query, type) => {
   return `${SEARCH_URL}${query}&w=${type}&p=1`;
