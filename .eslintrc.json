@@ -1,0 +1,16 @@
+{
+  "env": {
+    "commonjs": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": ["airbnb-base", "plugin:prettier/recommended"],
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "rules": {
+    "no-useless-escape": 0,
+    "array-callback-return": 0,
+    "func-names": 0
+  }
+}
