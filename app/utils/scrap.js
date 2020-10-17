@@ -3,7 +3,7 @@ const got = require("got");
 const Types = require("./types");
 
 const loadHTML = async (url) => {
-  return cheerio.load((await got(url)).body);
+  return cheerio.load((await got(url, { timeout: 10000 })).body);
 };
 
 const loadLyrics = async ($) => {
