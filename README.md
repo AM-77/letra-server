@@ -10,7 +10,7 @@
 </p>
 
 <h2 align="center">letra-server</h2>
-<p align="center">The letra api.</p>
+<p align="center">The letra API.</p>
 
 ## Built with:
 
