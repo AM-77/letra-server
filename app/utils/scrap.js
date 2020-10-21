@@ -14,11 +14,15 @@ const loadLyrics = async ($) => {
     }
   );
 
-  $(
-    "body > div.container.main-page > div > .text-center .lyricsh > h2 > b"
-  ).filter(function () {
-    lyrics.artist = $(this).text().replace(" Lyrics", "");
-  });
+  $("body > div.container.main-page > div > .text-center .lyricsh > h2").filter(
+    function () {
+      lyrics.artist = $(this).text().replace(" Lyrics", "");
+      const link = $(this).find("a").attr("href");
+      if (link) {
+        lyrics.artistLink = `/artist${link.slice(link.lastIndexOf("/"), -5)}`;
+      }
+    }
+  );
 
   $("body > div.container.main-page > div > .text-center div")
     .contents()
@@ -126,7 +130,7 @@ const loadArtistsList = ($) => {
   $("body > div.container.main-page > div .artist-col a").filter(function () {
     const linkHref = $(this).attr("href");
     const name = $(this).text();
-    const link = `/artist/${linkHref.slice(linkHref.indexOf("/") - 1, -5)}`;
+    const link = `/artist/${linkHref.slice(linkHref.indexOf("/") + 1, -5)}`;
     artists.push({ name, link });
   });
   return artists;
