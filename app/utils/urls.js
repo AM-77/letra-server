@@ -5,6 +5,9 @@ const formatSearchURL = (query, type) => {
 };
 
 const formatArtistsListURL = (start) => {
+  if (start === "*") {
+    return `${BASE_URL}/19.html`;
+  }
   return `${BASE_URL}/${start}.html`;
 };
 
